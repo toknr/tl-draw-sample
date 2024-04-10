@@ -1,41 +1,28 @@
-import type { MetaFunction } from "@remix-run/node";
+import { useState } from 'react'
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+const App = () => {
+  const timeSlots = [
+    '18:00',
+    '19:00',
+    '20:00'
   ];
-};
 
-export default function Index() {
+  const imagesPerSlot = 4;
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="flex flex-col gap-4 p-8 bg-gray-800 text-white font-sans min-h-screen">
+      {timeSlots.map((slot, index) => (
+        <div key={index} className="flex">
+          <div className="mr-4 font-bold text-lg min-w-[50px]">{slot}</div>
+          <div className="flex gap-4 flex-wrap">
+            {Array.from({ length: imagesPerSlot }, (_, i) => (
+              <div key={i} className="w-32 h-32 bg-gray-700 flex items-center justify-center text-gray-400 cursor-pointer"></div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
-  );
+  )
 }
+
+export default App;
